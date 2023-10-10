@@ -1,32 +1,25 @@
 import express from 'express'
 import userModel from '../services/userModel'
 const getAllUser = async (req, res) => {
-  let userList = await userModel.getAllUser()
-  res.render('home', {data: {title: 'List User', page: 'listUser', rows: userList}})
+  const userList = await userModel.getAllUser()
+  res.render('listUser', {users: userList})
 }
-const createUser = (req, res) => {
-  res.render('home', {data: {title: 'List User', page: 'listUser'}})
-}
+
 const detailUser = async (req, res) => {
-  if (isAuthentication(req, res) == true) {
     let user = req.params.username
     let dataUser = await userModel.detailUser(user)
-    res.render('home', {data: {title: 'Detail User', page: 'detailUser', rows: dataUser}})
-  }
+    res.render('detailUser', {data: dataUser})
 }
 const editUser = async (req, res) => {
-  let user = req.params.username
-  let dataUser = await userModel.detailUser(user)
-  res.render('home', {data: { title: 'Edit User', page: 'editUser', rows: dataUser}})
+  const user = req.params.username
+  const dataUser = await userModel.detailUser(user)
+  res.render('detailUser', {data: dataUser})
 }
 const updateUser = async (req, res) => {
-  console.log(req.body)
-  let role = 0
-  let { user, pass, fullname, address } = req.body
-  if ('role' in req.body)
-    role = 1
-  await userModel.updateUser(full, pass, address, role, user)
-  res.redirect("/list-user")
+  const user = req.params.username
+  const {fullname, address, email} = req.body
+  await userModel.updateUser(fullname, address, email, user)
+ res.redirect('/list-user')
 }
 const deleteUser = async (req, res) => {
   let {username} = req.body
@@ -34,9 +27,9 @@ const deleteUser = async (req, res) => {
   res.redirect("/list-user")
 }
 const createUser =  (req, res) => {
-  res.render('home', { data: { title: 'Create New User', page: 'createNewUser'}})
+  res.render('home', {data: {title: 'List User', page: 'listUser'}})
 }
-const insert = async (req, res) => {
+const insertUser = async (req, res) => {
   let role = 0
   let { user, pass, fullname, address } = req.body
   if ('role' in req.body)
@@ -48,4 +41,4 @@ const insert = async (req, res) => {
   else
     res.send("User exist")
 }
-export default {getAllUser, createUser}
+export default {detailUser, getAllUser, editUser, updateUser, deleteUser, createUser, insertUser}

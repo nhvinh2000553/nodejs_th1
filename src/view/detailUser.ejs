@@ -1,20 +1,24 @@
-Detail User: <%=data.rows.user %>
-    <table class="table">
-        <tbody class="table-group-divider">
-            <tr>
-                <th scope="col"> Username</th>
-                <td>
-                    <%=data.rows.user %>
-                </td>
-            </tr>
-            <tr>
-                <th scope="col">Full name</th>
-                <td>
-                    <%=data.rows.fullname %>
-                </td>
-            </tr>
-            <tr>
-                <th scope="col">Address</th>
-            </tr>
-        </tbody>
-    </table>
+    <form action="/updateUser/<%= data.username %>" method="post">
+        <div>
+            <label for="">
+                Fullname
+            </label>
+            <input type="text" name="fullname" id="fullname" value="<%= data.fullname %>">
+        </div>
+        <div>
+            <label for="">
+                Address
+            </label>
+            <input type="text" name="address" id="address" value="<%= data.address %>">
+        </div>
+        <div>
+            <label for="">
+                Email
+            </label>
+            <input type="text" name="email" id="email" value="<%= data.email %>">
+        </div>
+        <button type="submit">
+            Submit
+
+        </button>
+    </form>

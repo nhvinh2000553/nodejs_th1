@@ -7,18 +7,14 @@ const app = express()
 dotenv.config()
 const port = process.env.PORT
 // const port = 3000
-app.use(bodyParser.urlencoded({ extended: false}))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false}))
+app.use(express.json())
 configViewEngine(app)
-initWebRouter(app);
 app.use(express.static(path.join(__dirname, 'public')))
-initWebRouter(app)
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-app.get('/about', (req, res) => {
-    res.render('about')
-}) 
+initWebRouter(app);
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
