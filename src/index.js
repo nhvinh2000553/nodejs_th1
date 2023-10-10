@@ -7,6 +7,8 @@ const app = express()
 dotenv.config()
 const port = process.env.PORT
 // const port = 3000
+app.use(bodyParser.urlencoded({ extended: false}))
+app.use(bodyParser.json())
 configViewEngine(app)
 initWebRouter(app);
 app.use(express.static(path.join(__dirname, 'public')))

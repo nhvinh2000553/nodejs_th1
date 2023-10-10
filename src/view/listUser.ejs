@@ -1,56 +1,26 @@
-<table class="table table-hover mt-5">
-    <thead>
-      <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Tên</th>
-        <th scope="col">Tài khoản</th>
-        <th scope="col">Giới tính</th>
-        <th scope="col">Email</th>
-        <th scope="col">Địa chỉ</th>
-        <th scope="col">Quyền</th>
-        <th scope="col">Cấu hình</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Nguyễn Hoàng Vĩnh</td>
-        <td>nhvinh2000553</td>
-        <td>Nam</td>
-        <td>suprecute272@gmail.com</td>
-        <td>An Giang</td>
-        <td>User</td>
-        <td class="d-flex gap-2">
-          <a href="#">
-            <i class="fa fa-eye"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-edit"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Trần Quốc Vinh</td>
-        <td>TQvinh</td>
-        <td>Nam</td>
-        <td>tqviinh@gmail.com</td>
-        <td>Bến Tre</td>
-        <td>User</td>
-        <td class="d-flex gap-2">
-          <a href="#">
-            <i class="fa fa-eye"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-edit"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<% for (let i=0; i<data.rows.length;i++) { %>
+  <tr>
+    <th scope="row">
+      <%= i+1 %>
+    </th>
+    <td>
+      <%= data.rows[i].user %>
+    </td>
+    <td>
+      <%= data.rows[i].fullname %>
+    </td>
+    <td>
+      <%= data.rows[i].address %>
+    </td>
+    <td>
+      <a href="/list-user/<%= data.rows[i].user %>"><span class="setting"><i class="fa fa-eye" aria-hidden="true"></i></span></a>
+      <a href="/edit-user/<%= data.rows[i].user %>"><span class="setting"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
+      <form action="/delete-user" method="post" class="del">
+        <input type="hidden" value="<% data.rows[i].user %>" name="username" />
+        <label for="<%= data.rows[i].user %>"><span class="setting"><i class="fa fa-trash" aria-hidden="true"></i></span></label>
+        <input id="<%= data.rows[i].user %>" type="submit" value="Xóa" style="display: none;">
+
+      </form>
+    </td>
+  </tr>
+<% }%>
